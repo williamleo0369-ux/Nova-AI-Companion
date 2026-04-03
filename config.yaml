@@ -1,0 +1,30 @@
+# ========================================
+# Nova AI Companion 配置文件
+# ========================================
+
+nova:
+  name: "Nova"
+  version: "0.1.0"
+
+llm:
+  model: "gpt-4o-mini"
+  temperature: 0.85
+  max_tokens: 1024
+  extraction_model: "gpt-4o-mini"
+
+memory:
+  short_term_rounds: 20       # 短期记忆保留轮数
+  db_path: "data/nova_memory.db"
+  max_retrieval: 10           # 每次最大检索记忆数
+  extraction_interval: 3       # 每 N 轮触发记忆提取
+
+emotion:
+  decay_rate: 0.15            # 情绪衰减速率
+  significance_threshold: 0.4
+
+voice:
+  enabled: false
+  edge_voice: "zh-CN-XiaoyiNeural"
+  edge_rate: "+5%"
+  edge_pitch: "+2Hz"
+  output_dir: "data/output/voice"
