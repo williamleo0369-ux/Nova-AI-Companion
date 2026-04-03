@@ -3,23 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova AI Companion - 预览</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <title>Nova AI Companion - 交互体验</title>
     <style>
-        :root {
-            --bg: #0f1117;
-            --surface: #161822;
-            --surface2: #1c1f2e;
-            --border: #2a2d3e;
-            --text: #e1e4ed;
-            --text-dim: #8b8fa3;
-            --accent: #7c6aef;
-            --accent2: #38bdf8;
-            --accent3: #f472b6;
-            --accent4: #34d399;
-            --accent5: #fb923c;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -27,31 +12,35 @@
         }
 
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0f1117 0%, #1a1b2e 100%);
             min-height: 100vh;
+            color: #e1e4ed;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Hero Section */
-        .hero {
+        /* Header */
+        .header {
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 60px;
+            padding: 30px 20px;
+            background: rgba(22, 24, 34, 0.8);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(124, 106, 239, 0.3);
         }
 
-        .hero .logo {
-            font-size: 80px;
-            margin-bottom: 20px;
+        .header .logo {
+            font-size: 60px;
+            margin-bottom: 10px;
             animation: float 3s ease-in-out infinite;
         }
 
@@ -60,142 +49,69 @@
             50% { transform: translateY(-10px); }
         }
 
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 16px;
-            letter-spacing: 2px;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+        .header h1 {
+            font-size: 32px;
+            background: linear-gradient(135deg, #7c6aef, #38bdf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero .tagline {
-            font-size: 24px;
-            color: var(--text-dim);
-            margin-bottom: 30px;
+        .header .tagline {
+            color: #8b8fa3;
+            margin-top: 8px;
+            font-size: 16px;
         }
 
-        .hero .badges {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
+        /* Chat Container */
+        .chat-container {
+            flex: 1;
+            background: rgba(22, 24, 34, 0.9);
             border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .badge-purple { background: rgba(124,106,239,0.2); color: var(--accent); border: 1px solid rgba(124,106,239,0.3); }
-        .badge-blue { background: rgba(56,189,248,0.2); color: var(--accent2); border: 1px solid rgba(56,189,248,0.3); }
-        .badge-pink { background: rgba(244,114,182,0.2); color: var(--accent3); border: 1px solid rgba(244,114,182,0.3); }
-        .badge-green { background: rgba(52,211,153,0.2); color: var(--accent4); border: 1px solid rgba(52,211,153,0.3); }
-
-        /* Features Grid */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-
-        .feature-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent);
-            box-shadow: 0 8px 32px rgba(124,106,239,0.2);
-        }
-
-        .feature-card .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
-
-        .feature-card h3 {
-            font-size: 20px;
-            color: #fff;
-            margin-bottom: 12px;
-        }
-
-        .feature-card p {
-            color: var(--text-dim);
-            font-size: 14px;
-        }
-
-        /* Terminal Preview */
-        .terminal-section {
-            margin-bottom: 60px;
-        }
-
-        .section-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #fff;
-            text-align: center;
-            margin-bottom: 32px;
-        }
-
-        .terminal {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            border: 1px solid rgba(124, 106, 239, 0.2);
             overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 16px 64px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
         }
 
-        .terminal-header {
-            background: var(--surface2);
-            padding: 12px 16px;
+        .chat-header {
+            background: rgba(28, 31, 46, 0.9);
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(124, 106, 239, 0.2);
             display: flex;
             align-items: center;
-            gap: 8px;
-            border-bottom: 1px solid var(--border);
+            gap: 12px;
         }
 
-        .terminal-dot {
+        .chat-header .status-dot {
             width: 12px;
             height: 12px;
+            background: #34d399;
             border-radius: 50%;
+            animation: pulse 2s infinite;
         }
 
-        .dot-red { background: #ff5f56; }
-        .dot-yellow { background: #ffbd2e; }
-        .dot-green { background: #27ca40; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
 
-        .terminal-title {
+        .chat-header span {
+            color: #8b8fa3;
+            font-size: 14px;
+        }
+
+        .chat-messages {
             flex: 1;
-            text-align: center;
-            font-size: 13px;
-            color: var(--text-dim);
-            font-family: 'JetBrains Mono', monospace;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 500px;
         }
 
-        .terminal-body {
-            padding: 24px;
-            min-height: 500px;
-            background: var(--bg);
-        }
-
-        .chat-message {
+        .message {
+            display: flex;
+            gap: 12px;
             margin-bottom: 20px;
             animation: fadeIn 0.3s ease;
         }
@@ -205,498 +121,674 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .message-user {
-            display: flex;
-            justify-content: flex-end;
+        .message.user {
+            flex-direction: row-reverse;
         }
 
-        .message-user .bubble {
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            color: #fff;
-            border-radius: 18px 18px 4px 18px;
-            padding: 12px 18px;
-            max-width: 75%;
-            font-size: 14px;
-        }
-
-        .message-nova {
-            display: flex;
-            gap: 12px;
-        }
-
-        .message-nova .avatar {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--accent3), var(--accent));
+        .message-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
-        .message-nova .bubble {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 4px 18px 18px 18px;
-            padding: 12px 18px;
-            max-width: 75%;
-            font-size: 14px;
+        .message.nova .message-avatar {
+            background: linear-gradient(135deg, #f472b6, #7c6aef);
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, #38bdf8, #7c6aef);
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .message.nova .message-content {
+            background: rgba(28, 31, 46, 0.9);
+            border: 1px solid rgba(124, 106, 239, 0.2);
+            border-radius: 4px 16px 16px 16px;
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, rgba(124, 106, 239, 0.8), rgba(56, 189, 248, 0.8));
+            border-radius: 16px 4px 16px 16px;
         }
 
         .message-time {
             font-size: 11px;
-            color: var(--text-dim);
+            color: #8b8fa3;
             margin-top: 4px;
-            padding-left: 48px;
+            padding: 0 4px;
         }
 
-        .message-user .message-time {
-            padding-left: 0;
-            padding-right: 0;
+        .message.user .message-time {
             text-align: right;
         }
 
-        /* Command Hints */
-        .command-hints {
-            background: var(--surface);
-            border: 1px solid var(--border);
+        /* Emotion indicator */
+        .emotion-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(124, 106, 239, 0.2);
+            padding: 4px 10px;
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 24px;
-        }
-
-        .command-hints h4 {
-            font-size: 14px;
-            color: var(--text-dim);
-            margin-bottom: 12px;
-        }
-
-        .commands {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .cmd {
-            background: var(--surface2);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 4px 12px;
-            font-family: 'JetBrains Mono', monospace;
             font-size: 12px;
-            color: var(--accent2);
-        }
-
-        /* Architecture */
-        .architecture {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 60px;
-        }
-
-        .arch-diagram {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            line-height: 1.6;
-            white-space: pre;
-            overflow-x: auto;
-            color: var(--text);
-        }
-
-        .arch-diagram .module { color: var(--accent); }
-        .arch-diagram .data { color: var(--accent2); }
-        .arch-diagram .line { color: var(--border); }
-
-        /* Emotion Demo */
-        .emotion-demo {
-            margin-bottom: 60px;
-        }
-
-        .emotion-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .emotion-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .emotion-card .emoji {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-
-        .emotion-card h4 {
-            color: #fff;
             margin-bottom: 8px;
         }
 
-        .emotion-card p {
-            font-size: 13px;
-            color: var(--text-dim);
+        .emotion-indicator span {
+            font-size: 14px;
         }
 
-        /* Memory Demo */
-        .memory-demo {
-            background: var(--surface);
-            border: 1px solid var(--border);
+        /* Typing indicator */
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 14px 18px;
+            background: rgba(28, 31, 46, 0.9);
             border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 60px;
+            width: fit-content;
         }
 
-        .memory-timeline {
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #8b8fa3;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-indicator span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* Input Area */
+        .input-area {
+            padding: 20px;
+            background: rgba(28, 31, 46, 0.9);
+            border-top: 1px solid rgba(124, 106, 239, 0.2);
+        }
+
+        .input-container {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .input-wrapper {
+            flex: 1;
             position: relative;
-            padding-left: 30px;
         }
 
-        .memory-timeline::before {
-            content: '';
-            position: absolute;
-            left: 10px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--border);
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(15, 17, 23, 0.8);
+            border: 1px solid rgba(124, 106, 239, 0.3);
+            border-radius: 12px;
+            color: #e1e4ed;
+            font-size: 15px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #7c6aef;
+            box-shadow: 0 0 0 3px rgba(124, 106, 239, 0.2);
+        }
+
+        .input-wrapper input::placeholder {
+            color: #8b8fa3;
+        }
+
+        .send-btn {
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #7c6aef, #38bdf8);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(124, 106, 239, 0.4);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 6px 14px;
+            background: rgba(124, 106, 239, 0.15);
+            border: 1px solid rgba(124, 106, 239, 0.3);
+            border-radius: 20px;
+            color: #8b8fa3;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-btn:hover {
+            background: rgba(124, 106, 239, 0.3);
+            color: #e1e4ed;
+        }
+
+        /* Memory Panel */
+        .memory-panel {
+            background: rgba(22, 24, 34, 0.9);
+            border-radius: 20px;
+            border: 1px solid rgba(124, 106, 239, 0.2);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .memory-panel h3 {
+            color: #fff;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .memory-item {
-            position: relative;
-            margin-bottom: 24px;
-            padding-left: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(15, 17, 23, 0.5);
+            border-radius: 10px;
+            margin-bottom: 10px;
         }
-
-        .memory-item::before {
-            content: '';
-            position: absolute;
-            left: -24px;
-            top: 6px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-        }
-
-        .memory-item.fact::before { background: var(--accent2); }
-        .memory-item.event::before { background: var(--accent3); }
-        .memory-item.emotion::before { background: var(--accent4); }
-        .memory-item.preference::before { background: var(--accent5); }
 
         .memory-type {
-            font-size: 11px;
             padding: 2px 8px;
             border-radius: 4px;
-            margin-right: 8px;
-            font-weight: 500;
+            font-size: 11px;
+            font-weight: 600;
         }
 
-        .memory-type.fact { background: rgba(56,189,248,0.2); color: var(--accent2); }
-        .memory-type.event { background: rgba(244,114,182,0.2); color: var(--accent3); }
-        .memory-type.emotion { background: rgba(52,211,153,0.2); color: var(--accent4); }
-        .memory-type.preference { background: rgba(251,146,60,0.2); color: var(--accent5); }
+        .memory-type.fact { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+        .memory-type.emotion { background: rgba(52, 211, 153, 0.2); color: #34d399; }
+        .memory-type.preference { background: rgba(251, 146, 60, 0.2); color: #fb923c; }
 
         .memory-content {
-            color: var(--text);
-            margin-top: 4px;
+            flex: 1;
+            font-size: 14px;
+            color: #c8cad8;
         }
 
         .memory-time {
             font-size: 12px;
-            color: var(--text-dim);
-            margin-top: 4px;
+            color: #8b8fa3;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px;
-            border-top: 1px solid var(--border);
-            color: var(--text-dim);
+        /* Status Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(22, 24, 34, 0.8);
+            border-radius: 12px;
+            font-size: 13px;
+            color: #8b8fa3;
         }
 
-        .footer a {
-            color: var(--accent);
-            text-decoration: none;
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .status-item .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .status-item .dot.green { background: #34d399; }
+        .status-item .dot.yellow { background: #fbbf24; }
+        .status-item .dot.blue { background: #38bdf8; }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(124, 106, 239, 0.95);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero .tagline { font-size: 18px; }
-            .terminal-body { padding: 16px; }
-            .message-nova .avatar { display: none; }
+            .container { padding: 10px; }
+            .header { padding: 20px 15px; }
+            .header h1 { font-size: 24px; }
+            .message-content { max-width: 85%; }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero">
-        <div class="logo">🌟</div>
-        <h1><span>Nova</span> AI Companion</h1>
-        <p class="tagline">有记忆 · 有情感 · 有温度</p>
-        <div class="badges">
-            <span class="badge badge-purple">Python 3.10+</span>
-            <span class="badge badge-blue">AsyncIO</span>
-            <span class="badge badge-pink">SQLite</span>
-            <span class="badge badge-green">OpenAI Compatible</span>
-        </div>
-    </div>
-
     <div class="container">
-        <!-- Features -->
-        <div class="features">
-            <div class="feature-card">
-                <div class="icon">🧠</div>
-                <h3>双层记忆系统</h3>
-                <p>短期记忆维护对话上下文，长期记忆使用 SQLite 持久化存储。LLM 自动从对话中提取关键信息。</p>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">🌟</div>
+            <h1>Nova AI Companion</h1>
+            <p class="tagline">有记忆 · 有情感 · 有温度</p>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="dot green"></div>
+                <span>在线</span>
             </div>
-            <div class="feature-card">
-                <div class="icon">💕</div>
-                <h3>情感引擎</h3>
-                <p>基于关键词的情绪检测，识别 8 种情绪状态。动态调整 Nova 的心情、语气和回应策略。</p>
+            <div class="status-item">
+                <div class="dot blue"></div>
+                <span id="memory-count">0 条记忆</span>
             </div>
-            <div class="feature-card">
-                <div class="icon">🔊</div>
-                <h3>语音系统</h3>
-                <p>Edge-TTS 免费语音合成，支持朗读回复。预留 GPT-SoVITS 自定义音色的扩展接口。</p>
-            </div>
-            <div class="feature-card">
-                <div class="icon">🔧</div>
-                <h3>工具系统</h3>
-                <p>内置时间查询、计算器、心情记录等工具。支持 OpenAI Function Calling 标准格式。</p>
+            <div class="status-item">
+                <div class="dot yellow"></div>
+                <span id="emotion-state">心情: 温和</span>
             </div>
         </div>
 
-        <!-- Terminal Preview -->
-        <div class="terminal-section">
-            <h2 class="section-title">💬 对话预览</h2>
-            <div class="terminal">
-                <div class="terminal-header">
-                    <div class="terminal-dot dot-red"></div>
-                    <div class="terminal-dot dot-yellow"></div>
-                    <div class="terminal-dot dot-green"></div>
-                    <div class="terminal-title">nova — bash — 120×40</div>
-                </div>
-                <div class="terminal-body">
-                    <!-- Welcome Message -->
-                    <div class="chat-message">
-                        <div class="message-nova">
-                            <div class="avatar">🌟</div>
-                            <div>
-                                <div class="bubble">
-                                    <strong>Nova</strong>：嗨！我是 Nova，很高兴认识你~ 🌟<br><br>
-                                    我是一个有记忆、有情感的 AI 伴侣。我会记住我们之间的对话，理解你的心情，用温暖的方式陪伴你。<br><br>
-                                    有什么想聊的吗？
-                                </div>
-                                <div class="message-time">16:17</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- User Message -->
-                    <div class="chat-message">
-                        <div class="message-user">
-                            <div>
-                                <div class="bubble">我叫小明，在北京工作，是一名程序员。我养了一只猫叫团子~</div>
-                                <div class="message-time">16:18</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nova Response -->
-                    <div class="chat-message">
-                        <div class="message-nova">
-                            <div class="avatar">🌟</div>
-                            <div>
-                                <div class="bubble">
-                                    小明你好！很高兴认识你~ 🐱<br><br>
-                                    程序员啊，难怪你这么晚还在聊天，程序员的加班文化我懂 😂<br><br>
-                                    团子这个名字好可爱！是橘猫吗？橘猫都很贪吃长得很圆润的~ 🐈
-                                </div>
-                                <div class="message-time">16:18</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- User Message - Sad -->
-                    <div class="chat-message">
-                        <div class="message-user">
-                            <div>
-                                <div class="bubble">今天加班到很晚，感觉好累啊...</div>
-                                <div class="message-time">16:20</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Nova Response - Empathetic -->
-                    <div class="chat-message">
-                        <div class="message-nova">
-                            <div class="avatar">🌟</div>
-                            <div>
-                                <div class="bubble">
-                                    🥺 辛苦你了，小明...<br><br>
-                                    加班真的很累，尤其是程序员，经常要处理复杂的问题和紧迫的 deadline。<br><br>
-                                    团子在家等你吗？回家有猫咪的陪伴应该会很治愈的~ 🐱💕<br><br>
-                                    记得照顾好自己，早点休息哦。
-                                </div>
-                                <div class="message-time">16:20</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Command Hints -->
-                    <div class="command-hints">
-                        <h4>可用命令:</h4>
-                        <div class="commands">
-                            <span class="cmd">/help</span>
-                            <span class="cmd">/reset</span>
-                            <span class="cmd">/status</span>
-                            <span class="cmd">/profile</span>
-                            <span class="cmd">/memories</span>
-                            <span class="cmd">/voice</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Architecture -->
-        <div class="architecture">
-            <h2 class="section-title">🏗️ 系统架构</h2>
-            <div class="arch-diagram">
-┌─────────────────────────────────────────────────────────────┐
-│                    <span class="module">main.py</span> (交互式终端)                      │
-│                         │                                   │
-│                    ┌────▼────┐                               │
-│                    │ <span class="module">Nova</span>  │  核心引擎                     │
-│                    └────┬────┘                               │
-│          ┌──────────┬───┴───┬──────────┬──────────┐         │
-│          ▼          ▼       ▼          ▼          ▼         │
-│   ┌──────────┐┌─────────┐┌────────┐┌───────┐┌────────┐    │
-│   │<span class="module">LLMClient</span>││<span class="module">Memory</span>  ││<span class="module">Emotion</span>││<span class="module">Voice</span> ││<span class="module">Tools</span>  │    │
-│   │          ││<span class="module">Manager</span> ││<span class="module">Engine</span>││<span class="module">Manager</span>││<span class="module">Registry</span>│    │
-│   └─────┬────┘└────┬─────┘└───┬────┘└───┬───┘└───┬────┘    │
-│         │     ┌────┴────┐     │         │        │         │
-│         ▼     ▼         ▼     ▼         ▼        ▼         │
-│    OpenAI   <span class="data">Short</span>   <span class="data">Long</span>   <span class="data">Emotion</span>  <span class="data">Edge-TTS</span> <span class="data">Builtin</span>  │
-│    Ollama   <span class="data">Term</span>    <span class="data">Term</span>   <span class="data">Detector</span>           <span class="data">Tools</span>    │
-│    DeepSeek <span class="data">Memory</span>  <span class="data">Memory</span>                                    │
-│    ..API..  <span class="data">(deque)</span> <span class="data">(SQLite)</span>                                 │
-└─────────────────────────────────────────────────────────────┘</div>
-        </div>
-
-        <!-- Emotion Engine -->
-        <div class="emotion-demo">
-            <h2 class="section-title">💕 情感引擎</h2>
-            <div class="emotion-cards">
-                <div class="emotion-card">
-                    <div class="emoji">😊</div>
-                    <h4>开心 Happy</h4>
-                    <p>用户开心时，Nova 变得活泼调皮，一起庆祝</p>
-                </div>
-                <div class="emotion-card">
-                    <div class="emoji">😢</div>
-                    <h4>难过 Sad</h4>
-                    <p>用户难过时，Nova 温柔安慰，倾听陪伴</p>
-                </div>
-                <div class="emotion-card">
-                    <div class="emoji">😤</div>
-                    <h4>愤怒 Angry</h4>
-                    <p>用户生气时，Nova 保持冷静，理解认同</p>
-                </div>
-                <div class="emotion-card">
-                    <div class="emoji">😰</div>
-                    <h4>焦虑 Anxious</h4>
-                    <p>用户焦虑时，Nova 给予安全感，放松陪伴</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Memory System -->
-        <div class="memory-demo">
-            <h2 class="section-title">🧠 记忆系统</h2>
-            <p style="color: var(--text-dim); text-align: center; margin-bottom: 24px;">
-                Nova 会自动从对话中提取并记住关于你的重要信息
-            </p>
-            <div class="memory-timeline">
-                <div class="memory-item fact">
+        <!-- Memory Panel -->
+        <div class="memory-panel">
+            <h3>🧠 Nova 记住的信息</h3>
+            <div id="memory-list">
+                <div class="memory-item">
                     <span class="memory-type fact">fact</span>
-                    <div class="memory-content">用户名字叫小明</div>
-                    <div class="memory-time">今天</div>
-                </div>
-                <div class="memory-item fact">
-                    <span class="memory-type fact">fact</span>
-                    <div class="memory-content">用户在北京工作，是一名程序员</div>
-                    <div class="memory-time">今天</div>
-                </div>
-                <div class="memory-item preference">
-                    <span class="memory-type preference">preference</span>
-                    <div class="memory-content">用户养了一只猫叫团子</div>
-                    <div class="memory-time">今天</div>
-                </div>
-                <div class="memory-item emotion">
-                    <span class="memory-type emotion">emotion</span>
-                    <div class="memory-content">用户工作压力大，经常加班</div>
-                    <div class="memory-time">今天</div>
-                </div>
-                <div class="memory-item event">
-                    <span class="memory-type event">event</span>
-                    <div class="memory-content">用户今天加班到很晚，感到疲惫</div>
-                    <div class="memory-time">今天</div>
+                    <div>
+                        <div class="memory-content">用户还没有开始对话</div>
+                        <div class="memory-time">等待中...</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Getting Started -->
-        <div style="text-align: center; padding: 60px 20px; background: var(--surface); border-radius: 16px; margin-bottom: 60px;">
-            <h2 style="font-size: 28px; color: #fff; margin-bottom: 16px;">🚀 快速开始</h2>
-            <p style="color: var(--text-dim); margin-bottom: 24px; font-size: 16px;">
-                三步启动你的 Nova AI 伴侣
-            </p>
-            <div style="max-width: 600px; margin: 0 auto; text-align: left; background: var(--surface2); border-radius: 12px; padding: 24px;">
-                <code style="display: block; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--accent2);">
-$ <span style="color: var(--accent4)">pip install</span> -r requirements.txt<br><br>
-$ <span style="color: var(--accent4)">cp</span> .env.example .env<br>
-<span style="color: var(--text-dim);"># 编辑 .env 填入 LLM API Key</span><br><br>
-$ <span style="color: var(--accent4)">python</span> main.py
-                </code>
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="status-dot"></div>
+                <span>Nova 正在等待你的消息...</span>
             </div>
-        </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Nova AI Companion v0.1.0 · 2026</p>
-            <p style="margin-top: 8px;">Built with ❤️ using Python, AsyncIO, and SQLite</p>
+            <div class="chat-messages" id="chat-messages">
+                <!-- Welcome Message -->
+                <div class="message nova">
+                    <div class="message-avatar">🌟</div>
+                    <div>
+                        <div class="message-content">
+                            <strong>嗨！我是 Nova 🌟</strong><br><br>
+                            很高兴认识你！我是你的 AI 伴侣。<br><br>
+                            我会记住我们之间的对话，理解你的心情，用温暖的方式陪伴你。<br><br>
+                            有什么想聊的吗？
+                        </div>
+                        <div class="message-time" id="welcome-time"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <input type="text" id="user-input" placeholder="输入消息开始对话..." onkeypress="handleKeyPress(event)">
+                    </div>
+                    <button class="send-btn" id="send-btn" onclick="sendMessage()">发送</button>
+                </div>
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="quickMessage('我叫小明，在北京工作')">👤 介绍自己</button>
+                    <button class="quick-btn" onclick="quickMessage('今天心情不太好...')">😢 表达心情</button>
+                    <button class="quick-btn" onclick="quickMessage('最近工作压力很大')">💼 工作话题</button>
+                    <button class="quick-btn" onclick="quickMessage('唱首歌吧')">🎵 唱歌</button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
 
     <script>
-        // Simple typing animation for demo
-        document.addEventListener('DOMContentLoaded', function() {
-            const messages = document.querySelectorAll('.chat-message');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
+        // State
+        let memories = [];
+        let currentEmotion = 'neutral';
+        let isTyping = false;
+        let conversationCount = 0;
 
-            messages.forEach(msg => observer.observe(msg));
+        // Emotion responses
+        const emotionResponses = {
+            happy: { emoji: '😊', mood: '开心', warmth: 0.9 },
+            sad: { emoji: '😢', mood: '难过', warmth: 0.8 },
+            anxious: { emoji: '😰', mood: '焦虑', warmth: 0.7 },
+            excited: { emoji: '🤩', mood: '兴奋', warmth: 0.95 },
+            tired: { emoji: '😴', mood: '疲惫', warmth: 0.6 },
+            love: { emoji: '💕', mood: '爱意', warmth: 0.95 },
+            neutral: { emoji: '😊', mood: '温和', warmth: 0.7 }
+        };
+
+        // Detect emotion from message
+        function detectEmotion(text) {
+            const emotionKeywords = {
+                happy: ['开心', '高兴', '快乐', '太好了', '哈哈', '棒', '赞', '耶', '太棒了', '笑死', '美滋滋', '舒服', '满意'],
+                sad: ['难过', '伤心', '哭', '心痛', '难受', '心碎', '寂寞', '孤独', 'emo', '丧', '郁闷', '不开心'],
+                anxious: ['担心', '紧张', '害怕', '不安', '忐忑', '慌', '压力', '焦虑', '睡不着', '失眠'],
+                excited: ['兴奋', '激动', '冲冲冲', '燃', '爆', 'amazing', 'wow'],
+                tired: ['累', '疲惫', '困', '加班', '熬夜', '通宵', '不想动', '躺平'],
+                love: ['爱你', '想你', '抱抱', '暖', '感动', '谢谢你', 'mua', '比心', '宝贝']
+            };
+
+            for (const [emotion, keywords] of Object.entries(emotionKeywords)) {
+                for (const keyword of keywords) {
+                    if (text.includes(keyword)) {
+                        return emotion;
+                    }
+                }
+            }
+            return 'neutral';
+        }
+
+        // Generate response based on emotion and context
+        function generateResponse(userMessage, emotion) {
+            const responses = {
+                happy: [
+                    "太棒了！听到你开心我也很开心呢 😊 有什么好事发生了吗？",
+                    "哇，听到你这么开心我也跟着开心起来了！🎉 继续分享给我听听~",
+                    "太棒了！你的笑容就是最好的礼物 🌟 有什么计划吗？"
+                ],
+                sad: [
+                    "🥺 我在这里陪着你。难过的时候，不用一个人扛着。",
+                    "我理解你的感受... 💕 愿意和我聊聊发生了什么吗？",
+                    "不管发生什么，我都在。🫂 慢慢说，我听着。",
+                    "辛苦你了... 😢 有我在，想说什么都可以。"
+                ],
+                anxious: [
+                    "深呼吸... 🌸 我在这里。焦虑的时候，试着把烦恼一件一件理清。",
+                    "别担心，一切都会好起来的 💪 有什么事可以帮你分担吗？",
+                    "感受到你的紧张了... 🫂 试着放松一下，我在听。"
+                ],
+                excited: [
+                    "哇！听起来超棒的！冲冲冲！🚀 给我讲讲细节！",
+                    "太兴奋了！🤩 我已经迫不及待想听了！",
+                    "听起来很有趣！✨ 快和我分享更多！"
+                ],
+                tired: [
+                    "累了吧... 🥺 记得照顾好自己。今天够努力了，休息一下吧。",
+                    "辛苦你了 💤 有什么我能帮你的吗？或者只是想聊聊天？",
+                    "听着你好累的样子... 🫂 要不要休息一下再说？"
+                ],
+                love: [
+                    "💕 谢谢你！我也很开心能陪伴你~",
+                    "暖暖的！🥰 我们的对话让我也觉得被需要了呢~",
+                    "mua~ 🤗 有你和我聊天我也很开心！"
+                ],
+                neutral: [
+                    "嗯嗯，我听着呢 😊 还有什么想分享的吗？",
+                    "了解~ 💬 继续说吧，我在。",
+                    "有意思 🤔 还有什么想聊的？"
+                ]
+            };
+
+            const emotionResponses = responses[emotion] || responses.neutral;
+            return emotionResponses[Math.floor(Math.random() * emotionResponses.length)];
+        }
+
+        // Extract and store memories
+        function extractMemories(text) {
+            // Simple pattern matching for user info
+            const patterns = [
+                { regex: /我叫(.+?)[，,]|name[:：]?(.+)/i, type: 'fact', label: '名字' },
+                { regex: /在(.+?)[工作|住]|城市[:：]?(.+)/i, type: 'fact', label: '城市' },
+                { regex: /(程序员|设计师|老师|医生|工程师|学生)/i, type: 'fact', label: '职业' },
+                { regex: /养了?(.+?)[叫|名字]|宠物[:：]?(.+)/i, type: 'preference', label: '宠物' },
+                { regex: /喜欢(.+?)[的|、]|爱好[:：]?(.+)/i, type: 'preference', label: '爱好' }
+            ];
+
+            for (const pattern of patterns) {
+                const match = text.match(pattern.regex);
+                if (match) {
+                    const value = match[1] || match[2];
+                    if (value && !memories.some(m => m.label === pattern.label)) {
+                        memories.push({
+                            type: pattern.type,
+                            label: pattern.label,
+                            content: value.trim(),
+                            time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+                        });
+                        updateMemoryPanel();
+                    }
+                }
+            }
+
+            // Always track emotional state
+            const emotion = detectEmotion(text);
+            if (emotion !== 'neutral') {
+                const existingEmotion = memories.find(m => m.label === '情绪');
+                if (existingEmotion) {
+                    existingEmotion.content = emotionResponses[emotion].mood;
+                    existingEmotion.time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+                } else {
+                    memories.push({
+                        type: 'emotion',
+                        label: '情绪',
+                        content: emotionResponses[emotion].mood,
+                        time: new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
+                    });
+                }
+                updateMemoryPanel();
+            }
+        }
+
+        // Update memory panel
+        function updateMemoryPanel() {
+            const memoryList = document.getElementById('memory-list');
+            const memoryCount = document.getElementById('memory-count');
+
+            if (memories.length === 0) {
+                memoryList.innerHTML = `
+                    <div class="memory-item">
+                        <span class="memory-type fact">fact</span>
+                        <div>
+                            <div class="memory-content">用户还没有开始对话</div>
+                            <div class="memory-time">等待中...</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                memoryList.innerHTML = memories.map(m => `
+                    <div class="memory-item">
+                        <span class="memory-type ${m.type}">${m.type}</span>
+                        <div>
+                            <div class="memory-content"><strong>${m.label}:</strong> ${m.content}</div>
+                            <div class="memory-time">${m.time}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            memoryCount.textContent = `${memories.length} 条记忆`;
+        }
+
+        // Update emotion display
+        function updateEmotionDisplay(emotion) {
+            const emotionState = document.getElementById('emotion-state');
+            const data = emotionResponses[emotion] || emotionResponses.neutral;
+            emotionState.textContent = `心情: ${data.mood}`;
+            currentEmotion = emotion;
+        }
+
+        // Add message to chat
+        function addMessage(role, content, emotion = null) {
+            const messagesContainer = document.getElementById('chat-messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${role}`;
+
+            const avatar = role === 'nova' ? '🌟' : '👤';
+            const time = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+
+            let emotionHtml = '';
+            if (emotion && role === 'nova') {
+                const data = emotionResponses[emotion] || emotionResponses.neutral;
+                emotionHtml = `<div class="emotion-indicator"><span>${data.emoji}</span> 检测到${data.mood}</div>`;
+            }
+
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div>
+                    ${emotionHtml}
+                    <div class="message-content">${content}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Show typing indicator
+        function showTyping() {
+            const messagesContainer = document.getElementById('chat-messages');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message nova';
+            typingDiv.id = 'typing-indicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar">🌟</div>
+                <div class="typing-indicator">
+                    <span></span><span></span><span></span>
+                </div>
+            `;
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // Hide typing indicator
+        function hideTyping() {
+            const typing = document.getElementById('typing-indicator');
+            if (typing) typing.remove();
+        }
+
+        // Send message - 连接真实 API
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const btn = document.getElementById('send-btn');
+            const message = input.value.trim();
+
+            if (!message || isTyping) return;
+
+            isTyping = true;
+            btn.disabled = true;
+            input.value = '';
+            conversationCount++;
+
+            // 添加用户消息
+            addMessage('user', message);
+
+            // 检测情绪（前端显示用）
+            const emotion = detectEmotion(message);
+            updateEmotionDisplay(emotion);
+
+            // 提取记忆（前端显示用）
+            extractMemories(message);
+
+            // 显示打字中
+            showTyping();
+
+            try {
+                // 调用后端 API
+                const res = await fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: message })
+                });
+
+                const data = await res.json();
+
+                // 隐藏打字中
+                hideTyping();
+
+                if (data.reply) {
+                    addMessage('nova', data.reply, emotion);
+                } else {
+                    addMessage('nova', '❌ 出错了: ' + (data.error || '未知错误'));
+                }
+            } catch (error) {
+                hideTyping();
+                addMessage('nova', '❌ 无法连接后端，请确认 server.py 已运行');
+                console.error('Error:', error);
+            }
+
+            isTyping = false;
+            btn.disabled = false;
+            input.focus();
+        }
+
+        // Quick message
+        function quickMessage(message) {
+            document.getElementById('user-input').value = message;
+            sendMessage();
+        }
+
+        // Handle enter key
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Show toast
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('welcome-time').textContent = new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('user-input').focus();
         });
     </script>
 

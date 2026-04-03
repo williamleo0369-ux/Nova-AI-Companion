@@ -16,6 +16,33 @@
 
 ## 🚀 快速开始
 
+### 方式一：Web 界面（推荐）
+
+需要同时运行后端和打开网页：
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/williamleo0369-ux/Nova-AI-Companion.git
+cd Nova-AI-Companion
+
+# 2. 安装依赖
+pip3 install -r requirements.txt
+
+# 3. 配置 API（可选，不配置也能用后备响应）
+cp .env.example .env
+# 编辑 .env 文件，填入您的 API Key
+
+# 4. 启动后端（终端 1）
+python3 server.py
+
+# 5. 打开浏览器访问 preview/index.html
+# 或直接双击打开 preview/index.html 文件
+```
+
+> ⚠️ 注意：由于浏览器安全限制，需要通过 `python3 server.py` 启动后端后，再在浏览器中打开 `preview/index.html` 才能正常通信。
+
+### 方式二：终端模式
+
 ### 环境要求
 
 - Python 3.10 或更高版本
@@ -47,6 +74,18 @@ python3 main.py
 ### 配置 LLM
 
 编辑 `.env` 文件，选择您使用的 LLM 服务：
+
+### MiniMax API 配置（用于 server.py Web 后端）
+
+```env
+MINIMAX_API_KEY=your-minimax-api-key
+MINIMAX_BASE_URL=https://api.minimax.chat/v
+MINIMAX_MODEL=MiniMax-Text-01
+TEMPERATURE=0.8
+MAX_TOKENS=1024
+```
+
+### OpenAI / Ollama / DeepSeek 配置（用于 main.py 终端模式）
 
 ```env
 # 方案 A: OpenAI
@@ -113,10 +152,13 @@ LLM_MODEL=deepseek-chat
 
 ```
 nova-ai/
-├── main.py                     # 程序入口
+├── main.py                     # 程序入口（终端模式）
+├── server.py                   # Web 后端（Web 界面模式）
 ├── config.yaml                 # 配置文件
 ├── .env.example                # 环境变量模板
 ├── requirements.txt             # Python 依赖
+├── preview/
+│   └── index.html             # Web 界面预览页面
 ├── nova/
 │   ├── __init__.py
 │   ├── prompts.py              # 提示词构建
